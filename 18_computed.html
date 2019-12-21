@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <!--
+  @author pjw
+  @date 20191215
+
   메서드명만 변경하여 같은 로직을 작성 하여, methods와 computed 속성에 정의를 한 다음 호출 시
   methods에 정의한 메서드는 호출될 때마다 메서드 안에 로직이 수행되고,
   computed에 정의한 메서드는 최초 한번 호출 되고 연산 결과를 캐싱을 합니다. 참조하는 데이터가 바뀌지 않는 한 캐싱된 값만 리턴합니다.
@@ -47,7 +50,7 @@
     <p> {{ reverseMessageByComputed }} </p>
 
   </div>
-  <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script>
     new Vue({
       el: '#app',

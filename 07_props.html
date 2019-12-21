@@ -1,7 +1,7 @@
 <html>
 <!--
   @author pjw
-  @date 201912015
+  @date 20191215
   
   자식 컴포넌트 (child-component)가 부모객체가 가지고 있는 데이터를 참조하려면
   부모객체(app)에서 props 라는 속성을 사용하여 자식 컴포넌트에게 
@@ -27,7 +27,7 @@
     <div id="app">
       <child-component v-bind:my-message="parentMsg"></child-component>
     </div>
-    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
       Vue.component('child-component', {
         props: ['myMessage'],

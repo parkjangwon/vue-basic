@@ -1,7 +1,7 @@
 <html>
 <!--
   @author pjw
-  @date 201912015
+  @date 20191215
   
   하위 컴포넌트에서 상위 컴포넌트로 통신을 하는 방법 1
   - 하위 컴포넌트에서 이벤트를 발생 (event emit), 상위 컴포넌트에 신호를 준다.
@@ -22,7 +22,7 @@
       <child-component v-on:show-log="printText"></child-component>
     </div>
 
-    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
       Vue.component("child-component", {
         template: '<button v-on:click="showLog">show</button>',

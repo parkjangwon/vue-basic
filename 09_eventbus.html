@@ -1,7 +1,7 @@
 <html lang="en">
 <!--
   @author pjw
-  @date 201912015
+  @date 20191215
   
   vue.js는 기본적으로 상위컴포넌트에서 하위컴포넌트로 데이터를 전달해야하는 기본적인 통신 규칙을 따릅니다.
   따라서, 하위컴포넌트1에서 하위컴포넌트2에게 데이터를 전달하려면, 공통 상위 컴포넌트에 이벤트를 호출하고,
@@ -26,7 +26,7 @@
       <child-component></child-component>
     </div>
 
-    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
       var eventBus = new Vue();
       Vue.component("child-component", {
