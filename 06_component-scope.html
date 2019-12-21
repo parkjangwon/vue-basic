@@ -1,0 +1,50 @@
+<html>
+<!--
+  @author pjw
+  @date 201912015
+
+  뷰 인스턴스에 등록한 컴포넌트들 고유의 scope를 가지고 있습니다.
+  여기서 중요한것은 부모 객체(app)가 있고 자식 컴포넌트들(cmp1, cmp2)이 있는데,
+  자식 컴포넌트끼리는 직접 값을 참조 할 수 없습니다.
+-->
+  <head>
+    <title>Vue Study: Component scope</title>
+  </head>
+  <body>
+    <div id="app">
+      <my-component1></my-component1>
+      <!-- 각 컴포넌트는 고유의 scope를 가진다. 직접 다른 컴포넌트의 값을 참조 할 수 없다! -->
+      <my-component2></my-component2>
+    </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script>
+      var cmp1 = {
+        template: "<div>첫 번째 지역 컴포넌트 : {{ cmp1Data }} </div>",
+        data: function() {
+          return {
+            cmp1Data: 100
+          };
+        }
+      };
+
+      var cmp2 = {
+        template: "<div>두 번째 지역 컴포넌트 : {{ cmp2Data }} </div>",
+        data: function() {
+          return {
+            cmp2Data: cmp1.data.cmp1Data
+          };
+        }
+      };
+
+      new Vue({
+        el: "#app",
+        // 지역 컴포넌트 등록
+        components: {
+          "my-component1": cmp1,
+          "my-component2": cmp2
+        }
+      });
+    </script>
+  </body>
+</html>

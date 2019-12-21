@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912015
+  
+  Vue.js의 Hello, World 예제입니다.
+
+  예제들은 Do it! 'Vue.js 입문' 책과 Vue.js 공식 가이드 문서, 기타 블로그들을 참고하였습니다.
+-->
+<html>
+  <head>
+    <title>First Vue App</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+    </div>
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "Hello, Vue.js!"
+        }
+      });
+    </script>
+  </body>
+</html>

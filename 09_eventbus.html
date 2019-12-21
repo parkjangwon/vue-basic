@@ -1,0 +1,52 @@
+<html lang="en">
+<!--
+  @author pjw
+  @date 201912015
+  
+  vue.js는 기본적으로 상위컴포넌트에서 하위컴포넌트로 데이터를 전달해야하는 기본적인 통신 규칙을 따릅니다.
+  따라서, 하위컴포넌트1에서 하위컴포넌트2에게 데이터를 전달하려면, 공통 상위 컴포넌트에 이벤트를 호출하고,
+  공통 상위 컴포넌트에서 2개의 하위 컴포넌트에에 props 속성을 통하여 데이터를 내려 보내야 합니다.
+
+  이에 따라, 같은 레벨의 컴포넌트와 통신을 하기위해 불필요한 상위 컴포넌트를 두어야 하는데, 이를 해결 할 수 있는 방법이 eventbus 입니다.
+  
+  eventbus를 활요하면 직접 데이터를 전달할 수 있지만, 컴포넌트가 많아질 수록 관리에 어려움이 생기기 때문에,
+  보통 규모가 있는 애플리케이션을 개발 할 때는, vuex라는 라이브러리를 사용합니다...
+
+  vuex
+  Vuex는 Vue.js 애플리케이션에 대한 상태 관리 패턴 + 라이브러리 입니다. 
+  애플리케이션의 모든 컴포넌트에 대한 중앙 집중식 저장소 역할을 하며 예측 가능한 방식으로 상태를 변경할 수 있습니다. 
+  또한 Vue의 공식 devtools 확장 프로그램과 통합되어 설정 시간이 필요 없는 디버깅 및 상태 스냅 샷 내보내기/가져오기와 같은 고급 기능을 제공합니다.
+  url: https://vuex.vuejs.org/kr/
+-->
+  <head>
+    <title>Vue Study: eventBus</title>
+  </head>
+  <body>
+    <div id="app">
+      <child-component></child-component>
+    </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script>
+      var eventBus = new Vue();
+      Vue.component("child-component", {
+        template:
+          '<div>하위 컴포넌트 영역입니다. <button v-on:click="showLog">show</button></div>',
+        methods: {
+          showLog() {
+            eventBus.$emit("triggerEventBus", 100);
+          }
+        }
+      });
+
+      var app = new Vue({
+        el: "#app",
+        created() {
+          eventBus.$on("triggerEventBus", function(value) {
+            console.log("이벤트를 전달받음. 전달받은 값 : ", value);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

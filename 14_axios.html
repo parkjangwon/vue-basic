@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912015
+  
+  [axios]
+
+  현재 vue 커뮤니티에서 가장 많이 사용되는 Promise 기반의 HTTP 통신 라이브러리입니다.
+
+  기본 API 형태는 아래와 같습니다.
+        'http-method'.(url)
+  axios.get('url...').then(res => {}).catch(error => {})
+                      then : 통신 성공시 실행되는 콜백 함수 정의 (수행 로직 정의) (res = response : 서버에서 받은 응답 값)
+                      catch : 통신 에러시 실행 되는 콜백 함수 (수행 로직 정의) (err = error : 통신 실패에 대한 에러 값)
+  [참고url]
+  https://www.npmjs.com/package/vue-axios
+  https://ux.stories.pe.kr/138
+  https://luji.tistory.com/83
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Study: axios</title>
+</head>
+<body>
+  <div id="app">
+    <button v-on:click="getData">프레임워크 목록 가져오기</button>
+  </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/axios.min.js"></script>
+
+    <script>
+      new Vue({
+        el: '#app',
+        methods: {
+          getData() {
+            axios.get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json')
+            .then(res => {
+              console.log('통신 성공입니다.');
+              console.log(res.data);
+            })
+            .catch(err => {
+              console.log('통신 실패입니다.');
+              console.log(err);
+            })
+          }
+        },
+      })
+    </script>
+  
+</body>
+</html>

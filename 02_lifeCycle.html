@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912015
+  
+  뷰 인스턴스의 라이프 사이클을 크게 나누면 4단계로 이루어집니다.
+
+  1. 인스턴스의 생성
+  2. 화면의 부착
+  3. 부착된 인스턴스의 내용의 갱신
+  4. 인스턴스가 제거되는 소멸
+-->
+<html>
+  <head>
+    <title>View Study: Instance Life Cycle</title>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+    </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          message: "Hello, Vue.js!"
+        },
+        beforeCreate: function() {
+          console.log("beforeCreate");
+        },
+        created() {
+          console.log("created");
+        },
+        mounted() {
+          console.log("mounted");
+        },
+        updated() {
+          console.log("updated");
+        }
+      });
+    </script>
+  </body>
+</html>

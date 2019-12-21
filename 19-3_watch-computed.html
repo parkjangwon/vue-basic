@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912018
+
+  computed와 watch 속성의 비교를 볼 수 있는 예제 입니다.
+  app 인스턴스와 app2 인스턴스 모두 firstName, lastName이 변경 되었을 때 fullName이 바뀝니다.
+
+  - watch 속성은 감시할 데이터를 지정하고 그 데이터가 바뀌면 이런 함수를 실행하라는 방식으로 소프트웨어 공학에서 이야기하는 ‘명령형 프로그래밍’ 방식.
+  - computed 속성은 계산해야 하는 목표 데이터를 정의하는 방식으로 소프트웨어 공학에서 이야기하는 ‘선언형 프로그래밍’ 방식.
+
+  참고블로그 : https://beomy.tistory.com/49
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Study: watch-computed</title>
+</head>
+<body>
+  <div id ="app">
+    {{ fullName }}
+  </div>
+
+  <div id ="app2">
+    {{ fullName }}
+  </div>
+
+  <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+  <script>
+    // watch
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'Park',
+        lastName: 'Jangwon',
+        fullName: 'Park Jangwon'
+      },
+      watch: {
+        firstName(val) {
+          this.fullName = val + ' ' + this.lastName
+        },
+        lastName(val) {
+          this.fullName = this.firstName + ' ' + val
+        }
+      },
+    })
+    // computed
+    var vm2 = new Vue({
+      el: '#app2',
+      data: {
+        firstName: 'Park',
+        lastName: 'Jangwon'
+      },
+      computed: {
+        fullName() {
+          return this.firstName + ' ' + this.lastName;
+        }
+      },
+    })
+
+
+  </script>
+</body>
+</html>

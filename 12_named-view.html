@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912015
+
+  [네임드 뷰]
+  특정 페이지로 이동했을 때, 여러 개의 컴포넌트를 동시에 표시하는 라우팅 방식입니다.
+  즉, 하나의 페이지에서 같은 레벨의 <router-view>를 각 각 다른 템플릿 소스로 동시에 표시하는 방법입니다.
+  * Tiles Framwork와 유사한 느낌으로 보시면 됩니다...
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue Study: named-view</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 라우팅 영역 정의 -->
+      <router-view name="header"></router-view>
+      <!-- name이 없는 router-view가 default.... -->
+      <router-view></router-view>
+      <router-view name="footer"></router-view>
+    </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue-router.js"></script>
+    <script>
+      // 각 컴포넌트 내용 정의
+      var Body = { template: "<div>This is Body</div>" };
+      var Header = { template: "<div>This is Header</div>" };
+      var Footer = { template: "<div>This is Footer</div>" };
+
+      var router = new VueRouter({
+        routes: [
+          {
+            path: "/",
+            // router-view 태그의 name 속성과 컴포넌트를 연결
+            components: {
+              default: Body,
+              header: Header,
+              footer: Footer
+            }
+          }
+        ]
+      });
+
+      var app = new Vue({
+        router
+      }).$mount("#app");
+    </script>
+  </body>
+</html>

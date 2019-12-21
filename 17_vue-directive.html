@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!--
+  [뷰 디렉티브] : HTML 태그 안에 v- 접두사를 가지는 모든 속성들을 의미합니다.
+  [example]
+  <a v-if="flag">안뇽</a>
+  위 태그는 flag라는 변수가 true이면 a 태그가 화면에 표시가 되고, false인 경우 화면에 표시가 되지 않습니다.
+
+  주로 사용되는 디렉티브는 아래와 같습니다.
+
+v-if : 지정한 뷰 데이터 값의 참,거짓에 따라 해당 HTML 태그를 생성할 지 정할 때 사용하는 디렉티브입니다.
+
+v-for : 지정한 뷰 데이터의 개수만큼 해당 HTML 태그를 반복 출력합니다.
+
+v-show : v-if와 유사하지만, v-if는 해당 태그 자체를 삭제하거나 생성하지만,
+         v-show는 css효과만 변경합니다. 즉 display:none; 처럼 해당 태그는 존재하지만, 눈에 보이지만 않을 뿐입니다.
+
+v-bind : HTML 태그의 기본속성과 뷰 데이터 속성을 연결 해줍니다.
+         'v-bind:' 는 ':' 으로 약식으로 작성할 수 있습니다.
+         example : <p v-bind:class="style">바인딩</p> = <p :class="style">바인딩</p>
+
+v-on : 화면 요소의 이벤트를 감지하여 처리 할 때 사용합니다.
+       예를 들어, v-on:clik="메서드명" 인 경우, 해당 버튼을 클릭하면 클릭하면 특정 메서드가 동작 됩니다.
+       'v-on:' 는 '@' 으로 약식으로 작성할 수 있습니다.
+       example : <button v-on:click="bammmm">뻐튼</button> = <button @click="bammmm">뻐튼</button>
+
+vi-model : form 에서 주로 사용 되는 속성입니다. 폼에 입력한 값을 뷰 인스턴스의 데이터와 즉시 동기화 합니다.
+           화면에 입력된 값을 저장하여 서버에 보내거나, watch와 같은 고급 속석을 이용하여 추가 로직을 수행할 수 있습니다.
+           해당 디렉티브는 <input>, <select>, <textarea> 태그에서만 사용 할 수 있습니다.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Study: directive</title>
+</head>
+<body>
+  <div id="app">
+    <!-- flag 값이 false이면 태그 자체가 생성되지 않습니다. -->
+    <a v-if="flag">false면 없어진다ㅠ</a>
+    <!-- flag 값이 false이면 태그 자체는 존재하고 해당 태그에 style="display: none;" 속성이 추가 됩니다. -->
+    <p v-show="flag">그래도 나는 있긴하다.</p>
+
+    <!-- 간편하게 배열에 담긴 값을 꺼낼 수 있습니다. -->
+    <ul>
+      <li v-for="system in systems">{{ system }}</li>
+    </ul>
+
+    <!-- 해당 태그의 id속성에 바인딩 되는 것을 확인 할 수 있습니다. -->
+    <h5 v-bind:id="uid">내 나이가 어때서~</h5>
+    <!-- 약식으로 작성해도 동일합니다..-->
+    <h5 :id="uid">(약식)내 나이가 어때서~</h5>
+
+    <button v-on:click="showAlert">나의진심</button><br>
+    <!-- 약식으로 작성해도 동일합니다..-->
+    <button @click="showAlert">(약식)나의진심</button><br>
+    <!-- v-on 디렉티브를 사용 할 때 인자값을 넘길 수 있습니다. -->
+    <button @click="showInputNum(921205)">값전달</button><br>
+    <!-- v-on 디렉티브에 정의한 메서드에 직접 인자를 전달하지 않아도, 메서드를 정의 할 때 인자를 같이 정의하면 메서드 실행 시 인자가 전달됩니다. -->
+    <button @click="clickBtn">이벤트객체접근</button>
+
+  </div>
+  <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        flag: false,
+        systems: ['android', 'ios', 'windows', 'linux'],
+        uid: 28
+      },
+      methods: {
+        showAlert() {
+          return alert('휴가 가고 싶습니다~');
+        },
+        showInputNum(val) {
+          return alert('[ ' + val + ' ] 을 넘겼습니다.');
+        },
+        clickBtn(event) {
+          return console.log(event);
+        }
+      },
+    })
+  </script>
+  
+</body>
+</html>

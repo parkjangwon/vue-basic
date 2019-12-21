@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912015
+  
+  [네스티드 라우터]
+  ~/a
+  ~/a/b
+  ~/a/c
+  
+  위 처럼 상위컴포넌트 1개의 하위컴포넌트 1개이상 포함하는 구조..... 계층적인 url을 구성할 때 사용합니다.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue Study: nested-router</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 상위 컴포넌트(User)가 뿌려질 영역-->
+      <router-view></router-view>
+    </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue-router.js"></script>
+    <script>
+      // User 컴포넌트 정의
+      var User = {
+        template: `
+          <div>
+            User Component
+            <router-view></router-view>
+          </div>
+        `
+      };
+      // 하위 컴포넌트 정의 (profile, posts)
+      var UserProfile = { template: '<p>User Profile Component</p>' };
+      var UserPost = { template: '<p>User Post Component</p>' };
+
+      // 네스티드 라우팅 정의
+      var routes = [
+        {
+          path: '/user',
+          component: User,
+          children: [
+            {
+              path: 'posts',
+              component: UserPost
+            },
+            {
+              path: 'profile',
+              component: UserProfile
+            },
+          ]
+        }
+      ];
+      
+      // 뷰 라우터 정의
+      var router = new VueRouter({
+        routes
+      });
+
+      // 뷰 인스턴스에 라우터 추가
+      var app = new Vue({
+        router
+      }).$mount('#app');
+
+    </script>
+  </body>
+</html>

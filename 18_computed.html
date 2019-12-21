@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--
+  메서드명만 변경하여 같은 로직을 작성 하여, methods와 computed 속성에 정의를 한 다음 호출 시
+  methods에 정의한 메서드는 호출될 때마다 메서드 안에 로직이 수행되고,
+  computed에 정의한 메서드는 최초 한번 호출 되고 연산 결과를 캐싱을 합니다. 참조하는 데이터가 바뀌지 않는 한 캐싱된 값만 리턴합니다.
+
+  이러한 속성을 활용하면 데이터가 변경되지 않는 상황에서 복잡한 연산을 여러번 반복을 해야하는 상황이면
+  해당 메서드를 methods가 아닌 computed 속성에 정의를 하는 것이 성능 면에서 효율적입니다.
+
+  computed와 methods와의 차이점
+  1. computed는 연산 결과를 캐싱한다. computed 속성에 정의한 메서드가 호출될 시 
+     최초 한번 만 연산을 한 후 결과를 캐싱한다. 데이터가 변경되지 않으면 다시 연산을 하지 않고 캐싱된 값을 리턴한다.
+     methods는 반대로 호출 될 때마다, 메서드 안에 있는 연산을 다시 수행하여 결과를 리턴한다.
+  2. computed는 template에서 호출시 ()를 적지 않는다. (반대로 methods 속성에 정의한 함수를 호출시 반드시 ()을 붙여야한다... )
+  3. return 값이 반드시 존재해야한다.
+  4. 호출 될 때 파라메터를 받을 수 없다.
+
+  [주의사항]
+  - Date.now()와 같이 아무 곳에도 의존하지 않는 computed 속성은 절대로 업데이트 되지 않습니다.
+    computed: {
+      now() {
+        return Date.now()
+      }
+    }
+
+    > 매번 호출 할 때마다 현재시간을 리턴 할 경우 computed 속성이 아닌, methods 속성에 해당 메서드를 정의해야합니다...
+  출처: https://beomy.tistory.com/49
+
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Study: computed</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 원본 메시지 -->
+    <p> {{ message }} </p>
+    <p> {{ reverseMessageByMethods() }} </p>
+    <p> {{ reverseMessageByMethods() }} </p>
+    <p> {{ reverseMessageByMethods() }} </p>
+    
+    <p> {{ reverseMessageByComputed }} </p>
+    <p> {{ reverseMessageByComputed }} </p>
+    <p> {{ reverseMessageByComputed }} </p>
+
+  </div>
+  <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        message: "크리니티박장원",
+      },
+      methods: {
+        reverseMessageByMethods() {
+          console.log('[methods] reverseMessage() 호출!');
+          return this.message.split('').reverse().join('');
+        }
+      },
+      computed: {
+        reverseMessageByComputed() {
+          console.log('[computed] reverseMessage() 호출!');
+          return this.message.split('').reverse().join('');
+        }
+      },
+    })
+  </script>
+</body>
+</html>

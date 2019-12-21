@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912015
+  
+  [vue-resource]
+
+  jQuery 의 ajax처럼
+  간단하게 http 통신을 할 수 있는 라이브러리 입니다.
+
+  초기에는 공식 라이브러리였으나, 2016년 말 부터 공식 지원이 중단되었습니다.
+  현재도 사용은 가능합니다...만 다음 예제 파일에서 소개할 'axios' 라이브러리를 사용 하시길 권장합니다.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue Study: vue-resource</title>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="getData">프레임워크 목록 가져오기</button>
+    </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue-resource@1.5.1"></script>
+    <script>
+      new Vue({
+        el: '#app',
+        methods: {
+          getData() {
+            this.$http
+            .get('https://raw.githubusercontent.com/joshua1988/doit-vuejs/master/data/demo.json')
+            .then(function(res) {
+              console.log(res.body);
+            });
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912015
+
+  [template]
+
+  v-bind는 아이디, 클래스, 스타일 등의 HTML속성값에 뷰 데이터 값을 연결할 때 사용하는 데이터 연결 방식입니다.
+  v-bind: 는 :으로 간소화 할 수 있습니다.
+  [example] v-bind:id == :id
+  약식 문법을 사용할 때는 기본 문법과 약식문법을 혼용하지 않는것이 코드의 가독성에 좋습니다...
+  * 보통 vue code는 v- 접두사를 붙이기 때문에.. 기본문법을 사용하는 것이 일관성이 있음... 약식 문법을 사용하지 말라는 것은 아님.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Study: v-bind</title>
+</head>
+<body>
+  <div id="app">
+    <p v-bind:id="idA">아이디 바인딩</p>
+    <p v-bind:class="classA">클래스 바인딩</p>
+    <p v-bind:style="styleA">스타일 바인딩</p>
+  </div>
+  <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        idA: 10,
+        classA: 'container',
+        styleA: 'color: blue'
+      },
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<!--
+  @author pjw
+  @date 201912015
+  
+  하위 컴포넌트에서 상위 컴포넌트로 통신을 하는 방법 1
+  - 하위 컴포넌트에서 이벤트를 발생 (event emit), 상위 컴포넌트에 신호를 준다.
+
+  이벤트 발생 : $emit
+  this.$emit('이벤트명');
+
+  이벤트 수신 : v-on:현재 컴포넌트의 methods 속성에 정의된 이벤트 명(kebob-case)="상위 컴포넌트의 methods에 정의된 함수 명(camelCase)"
+  <child-componetn v-on:이벤트명='상위 컴포넌트의 메소드명'></child-componetn>
+-->
+  <head>
+    <title>Vue Study: emit</title>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ message }}</p>
+      <!-- 하위 컴포넌트(child-component)의 show-log에 바인딩 된 상위 컴포넌트(app)에서 정의한 함수'printText()'이 실행된다. -->
+      <child-component v-on:show-log="printText"></child-component>
+    </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+    <script>
+      Vue.component("child-component", {
+        template: '<button v-on:click="showLog">show</button>',
+        methods: {
+          showLog() {
+            // 여기서 show-log는 해당 컴포넌트의 v-on 디렉티브에 정의 된 '이벤트명'이다
+            this.$emit("show-log");
+          }
+        }
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue! passed from Parent Component"
+        },
+        methods: {
+          printText() {
+            console.log("received an event");
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

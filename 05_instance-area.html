@@ -1,0 +1,56 @@
+<html>
+<!--
+  @author pjw
+  @date 201912015
+  
+  지역 컴포넌트와 전역 컴포넌트의 차이를 볼 수 있는 예제입니다.
+ -->
+  <head>
+    <title>Vue Study: Instance Area</title>
+  </head>
+  <body>
+    <div id="app">
+      <h3>첫 번째 인스턴스 영역</h3>
+      <my-global-component></my-global-component>
+      <my-local-component></my-local-component>
+    </div>
+    <hr />
+    <div id="app2">
+      <h3>두 번째 인스턴스 영역</h3>
+      <my-global-component></my-global-component>
+      <my-local-component></my-local-component>
+    </div>
+
+    <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+
+    <script>
+      // 전역 컴포넌트 등록
+      Vue.component("my-global-component", {
+        template: "<div>[전역] 컴포넌트입니다.</div>"
+      });
+
+      // 지역 컴포넌트 등록
+      var cmp = {
+        template: "<div>[지역] 컴포넌트입니다.</div>"
+      };
+
+      var cmp2 = {
+        template: "<div>[지역] 컴포넌트입니다. [2]</div>"
+      };
+
+      new Vue({
+        el: "#app",
+        components: {
+          "my-local-component": cmp
+        }
+      });
+
+      var vm = new Vue({
+        el: "#app2",
+        components: {
+          "my-local-component": cmp2
+        }
+      });
+    </script>
+  </body>
+</html>

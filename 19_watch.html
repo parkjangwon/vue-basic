@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 201912018
+
+  - computed와 유사하게 data가 변함에 따라 특정 함수를 실행합니다.
+    일반적으로 내장 API를 호출하는 정도의 메서드를 작성할 때는 computed 속성을 사용하고
+    외부 서버 API 호출과 같이 시간이 상대적으로 더 많이 소모되는 비동기 처리에 적합합니다.
+    > 왜냐하면, 예를 들어 서버에 요청을 보냈을 때, 응답이 오는 시간은 언제 올지 모릅니다.
+    그에 따른 중간 설정을 computed 속성에서는 설정 할 수 없지만, watch 속성에서는 설정 할 수 있습니다.
+
+  - watch를 사용하면, API롤 호출하고 그 결과에 대한 응답을 받기 전까지 중간 상태를 설정할 수있습니다. 
+    computed를 사용하면 API 호출 결과를 기다리는 동안의 중간 상태을 설정할 수 없습니다.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue Study: watch</title>
+</head>
+<body>
+  <div id ="app">
+    <input v-model="message">
+  </div>
+
+  <script src="/Users/pjw/Documents/dev/js/vue/lib/cdn/vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello, Vue.js'
+      },
+      watch: {
+        message: function(data) {
+          console.log("message의 값이 바뀝니다 : " + data);
+        }
+      },
+      methods: {
+        // ES6 Syntax
+        testLogByMethods() {
+          console.log('this is test : testLogByMethods');
+        }
+      },
+      computed: {
+        // ES5 Syntax
+        testLogByComputed: function(){
+          console.log('this is test : testLogByComputed');
+        }
+      },
+    })
+
+    // 이런식으로도 쓸 수 있습니다.
+    vm.testLogByMethods();
+    // computed 속성에 메서드는 호출 시 괄호를 붙이지 않습니다.
+    vm.testLogByComputed;
+  </script>
+</body>
+</html>
