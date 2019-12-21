@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+  @author pjw
+  @date 20191221
+
+  Vue.js를 사용할 때, 타 js 라이브러리도 같이 사용할 수 있습니다.
+  가장 흔히 사용하는 jquery를 예를 들어 사용하는 방법입니다.
+
+  * jquery에서 제공하는 dom 요소 조작 용이성, ajax api 등,
+    개발 시 편리한 기능들 대부분은 vue.js에서 제공하기 때문에 jquery를 굳이 vue.js와 같이 사용 할 필요는 없습니다.
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Vue Study: vue with jquery</title>
+  </head>
+  <body>
+    <div id="app">
+      Vue 인스턴스<br />
+      <input id="calendar">
+      
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+      var vm = new Vue({
+        el: '#app', 
+        created() {
+          // jquery가 정상적으로 호출되었는지 확인
+          console.log($.fn.jquery);
+          // jquery-ui가 정상적으로 호출되었는지 확인
+          console.log($.ui.version);
+        },
+        mounted() {
+          // vue instance가 화면에 부착되었을 때 DOM객체에 접근이 가능하기 때문에, mounted 속성에 정의한다.
+          $("#calendar").datepicker({});
+        },
+      });
+    </script>
+  </body>
+</html>
